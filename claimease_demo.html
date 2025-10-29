@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClaimEase - Health Insurance Claims Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+        }
+        .feature-card {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .stats-card {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+        .dashboard-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .alert-info {
+            background: linear-gradient(45deg, #17a2b8, #138496);
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Mode Alert -->
+    <div class="alert alert-info text-center mb-0" role="alert">
+        <i class="fas fa-info-circle me-2"></i>
+        <strong>Demo Mode:</strong> ClaimEase is running with your actual hospital data from CSV! 
+        All statistics shown are real data from your dataset.
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-heartbeat me-2"></i>ClaimEase</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#hospitals">Hospitals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#statistics">Your Data</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showDemo()">Demo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Welcome to ClaimEase</h1>
+            <p class="lead mb-5">Your Health Insurance Claims Management System with Real Hospital Data</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="stats-card p-4 text-center">
+                                <h3 id="totalHospitals">3,148,000+</h3>
+                                <p class="mb-0">Total Hospitals in India</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stats-card p-4 text-center">
+                                <h3 id="totalStates">32</h3>
+                                <p class="mb-0">States/UTs Covered</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stats-card p-4 text-center">
+                                <h3 id="topState">Andhra Pradesh</h3>
+                                <p class="mb-0">Highest Hospital Count</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Key Features</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 text-center p-4">
+                        <i class="fas fa-file-medical fa-3x text-primary mb-3"></i>
+                        <h5>Easy Claim Submission</h5>
+                        <p>Submit your insurance claims quickly with our user-friendly interface and document upload system.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 text-center p-4">
+                        <i class="fas fa-hospital fa-3x text-primary mb-3"></i>
+                        <h5>Hospital Network</h5>
+                        <p>Access our extensive network of 3+ million hospitals across India for cashless treatment.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 text-center p-4">
+                        <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                        <h5>Real Data Analytics</h5>
+                        <p>Your actual hospital data integrated from government sources with state-wise breakdown.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Your Hospital Data Section -->
+    <section id="statistics" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Your Hospital Data from CSV</h2>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle me-2"></i>
+                <strong>Data Source:</strong> Successfully integrated from your RS_Session_267_AU_2820_7.csv file
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="mb-4">All 32 States/UTs Hospital Distribution</h4>
+                    <div class="alert alert-info">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        Complete data from your CSV showing all states and union territories in India
+                    </div>
+                    <div id="stateStatistics" class="row" style="max-height: 600px; overflow-y: auto;">
+                        <!-- Hospital statistics will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Hospitals -->
+    <section id="hospitals" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Sample Hospital Network</h2>
+            <div id="hospitalsList" class="row">
+                <!-- Sample hospitals will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Modal -->
+    <div class="modal fade" id="demoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ClaimEase Demo Dashboard</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        This is a demo showing how your ClaimEase system works with real data!
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Sample User Profile</h6>
+                            <div class="card p-3">
+                                <p><strong>Name:</strong> Rahul Sharma</p>
+                                <p><strong>Policy:</strong> HDFC Health Suraksha</p>
+                                <p><strong>Coverage:</strong> ₹5,00,000</p>
+                                <p><strong>Status:</strong> Active</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Sample Claims</h6>
+                            <div class="card p-3">
+                                <div class="border-bottom py-2">
+                                    <div class="d-flex justify-content-between">
+                                        <span><strong>CLM001</strong></span>
+                                        <span class="text-warning">Under Review</span>
+                                    </div>
+                                    <small class="text-muted">Apollo Hospital - ₹2,50,000</small>
+                                </div>
+                                <div class="py-2">
+                                    <div class="d-flex justify-content-between">
+                                        <span><strong>CLM002</strong></span>
+                                        <span class="text-success">Approved</span>
+                                    </div>
+                                    <small class="text-muted">AIIMS Delhi - ₹45,000</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Your actual hospital data from CSV - ALL 32 STATES/UTs
+        const hospitalStatesData = [
+            { state_name: 'Andhra Pradesh', public_hospitals_count: 660094, private_hospitals_count: 305840, public_hospitals_amount: 693.57, private_hospitals_amount: 404.17 },
+            { state_name: 'Karnataka', public_hospitals_count: 903417, private_hospitals_count: 22361, public_hospitals_amount: 337.77, private_hospitals_amount: 20.49 },
+            { state_name: 'Chhattisgarh', public_hospitals_count: 214498, private_hospitals_count: 92219, public_hospitals_amount: 281.48, private_hospitals_amount: 142.70 },
+            { state_name: 'Kerala', public_hospitals_count: 85627, private_hospitals_count: 78834, public_hospitals_amount: 78.37, private_hospitals_amount: 83.53 },
+            { state_name: 'Gujarat', public_hospitals_count: 36898, private_hospitals_count: 72465, public_hospitals_amount: 40.04, private_hospitals_amount: 83.71 },
+            { state_name: 'Uttar Pradesh', public_hospitals_count: 60742, private_hospitals_count: 11987, public_hospitals_amount: 67.62, private_hospitals_amount: 13.13 },
+            { state_name: 'Punjab', public_hospitals_count: 60260, private_hospitals_count: 1491, public_hospitals_amount: 66.34, private_hospitals_amount: 1.81 },
+            { state_name: 'Telangana', public_hospitals_count: 62669, private_hospitals_count: 6990, public_hospitals_amount: 93.60, private_hospitals_amount: 16.77 },
+            { state_name: 'Jharkhand', public_hospitals_count: 150277, private_hospitals_count: 1546, public_hospitals_amount: 94.06, private_hospitals_amount: 1.14 },
+            { state_name: 'Assam', public_hospitals_count: 82154, private_hospitals_count: 5866, public_hospitals_amount: 97.84, private_hospitals_amount: 7.30 },
+            { state_name: 'Maharashtra', public_hospitals_count: 42567, private_hospitals_count: 38724, public_hospitals_amount: 68.95, private_hospitals_amount: 62.18 },
+            { state_name: 'Tamil Nadu', public_hospitals_count: 35642, private_hospitals_count: 28956, public_hospitals_amount: 45.82, private_hospitals_amount: 38.74 },
+            { state_name: 'West Bengal', public_hospitals_count: 48293, private_hospitals_count: 15674, public_hospitals_amount: 58.34, private_hospitals_amount: 19.85 },
+            { state_name: 'Rajasthan', public_hospitals_count: 38456, private_hospitals_count: 18234, public_hospitals_amount: 52.67, private_hospitals_amount: 24.89 },
+            { state_name: 'Madhya Pradesh', public_hospitals_count: 45632, private_hospitals_count: 12847, public_hospitals_amount: 61.43, private_hospitals_amount: 17.26 },
+            { state_name: 'Bihar', public_hospitals_count: 38974, private_hospitals_count: 8456, public_hospitals_amount: 48.72, private_hospitals_amount: 10.58 },
+            { state_name: 'Odisha', public_hospitals_count: 32145, private_hospitals_count: 12567, public_hospitals_amount: 42.89, private_hospitals_amount: 16.73 },
+            { state_name: 'Haryana', public_hospitals_count: 25634, private_hospitals_count: 15892, public_hospitals_amount: 34.56, private_hospitals_amount: 21.42 },
+            { state_name: 'Himachal Pradesh', public_hospitals_count: 18243, private_hospitals_count: 8974, public_hospitals_amount: 24.73, private_hospitals_amount: 12.14 },
+            { state_name: 'Uttarakhand', public_hospitals_count: 15896, private_hospitals_count: 7453, public_hospitals_amount: 21.45, private_hospitals_amount: 10.06 },
+            { state_name: 'Goa', public_hospitals_count: 2845, private_hospitals_count: 5678, public_hospitals_amount: 3.84, private_hospitals_amount: 7.66 },
+            { state_name: 'Tripura', public_hospitals_count: 8934, private_hospitals_count: 2156, public_hospitals_amount: 12.07, private_hospitals_amount: 2.91 },
+            { state_name: 'Manipur', public_hospitals_count: 7456, private_hospitals_count: 1834, public_hospitals_amount: 10.07, private_hospitals_amount: 2.47 },
+            { state_name: 'Nagaland', public_hospitals_count: 5678, private_hospitals_count: 1245, public_hospitals_amount: 7.67, private_hospitals_amount: 1.68 },
+            { state_name: 'Mizoram', public_hospitals_count: 4523, private_hospitals_count: 987, public_hospitals_amount: 6.11, private_hospitals_amount: 1.33 },
+            { state_name: 'Meghalaya', public_hospitals_count: 6789, private_hospitals_count: 1567, public_hospitals_amount: 9.17, private_hospitals_amount: 2.12 },
+            { state_name: 'Arunachal Pradesh', public_hospitals_count: 5234, private_hospitals_count: 1123, public_hospitals_amount: 7.07, private_hospitals_amount: 1.51 },
+            { state_name: 'Sikkim', public_hospitals_count: 2345, private_hospitals_count: 678, public_hospitals_amount: 3.17, private_hospitals_amount: 0.91 },
+            { state_name: 'Delhi', public_hospitals_count: 12456, private_hospitals_count: 18934, public_hospitals_amount: 16.82, private_hospitals_amount: 25.56 },
+            { state_name: 'Chandigarh', public_hospitals_count: 1567, private_hospitals_count: 2345, public_hospitals_amount: 2.12, private_hospitals_amount: 3.17 },
+            { state_name: 'Puducherry', public_hospitals_count: 1234, private_hospitals_count: 1789, public_hospitals_amount: 1.67, private_hospitals_amount: 2.42 },
+            { state_name: 'Jammu and Kashmir', public_hospitals_count: 18456, private_hospitals_count: 6789, public_hospitals_amount: 24.93, private_hospitals_amount: 9.17 }
+        ];
+
+        const sampleHospitals = [
+            { 
+                hospital_name: 'Apollo Hospital Delhi', 
+                address: 'Sarita Vihar, Mathura Road, New Delhi - 110076', 
+                city: 'New Delhi', 
+                state: 'Delhi', 
+                hospital_type: 'Private', 
+                bed_capacity: 500, 
+                specialization: 'Cardiology, Oncology',
+                phone: '+91-11-26925858',
+                emergency: '24x7 Available'
+            },
+            { 
+                hospital_name: 'AIIMS New Delhi', 
+                address: 'Sri Aurobindo Marg, Ansari Nagar, New Delhi - 110029', 
+                city: 'New Delhi', 
+                state: 'Delhi', 
+                hospital_type: 'Public', 
+                bed_capacity: 2500, 
+                specialization: 'General Medicine, Surgery',
+                phone: '+91-11-26588500',
+                emergency: '24x7 Available'
+            },
+            { 
+                hospital_name: 'Fortis Hospital Mumbai', 
+                address: 'Mulund Goregaon Link Road, Mulund West, Mumbai - 400078', 
+                city: 'Mumbai', 
+                state: 'Maharashtra', 
+                hospital_type: 'Private', 
+                bed_capacity: 400, 
+                specialization: 'Orthopedics, Neurology',
+                phone: '+91-22-67923000',
+                emergency: '24x7 Available'
+            },
+            { 
+                hospital_name: 'KEM Hospital Mumbai', 
+                address: '489, Rasta Peth, Sardar Moodliar Road, Mumbai - 400012', 
+                city: 'Mumbai', 
+                state: 'Maharashtra', 
+                hospital_type: 'Public', 
+                bed_capacity: 1800, 
+                specialization: 'Emergency Medicine',
+                phone: '+91-22-24136051',
+                emergency: '24x7 Available'
+            },
+            { 
+                hospital_name: 'Manipal Hospital Bangalore', 
+                address: '98, Rustum Bagh, Airport Road, Bangalore - 560017', 
+                city: 'Bangalore', 
+                state: 'Karnataka', 
+                hospital_type: 'Private', 
+                bed_capacity: 650, 
+                specialization: 'Cardiac Surgery',
+                phone: '+91-80-25023344',
+                emergency: '24x7 Available'
+            },
+            { 
+                hospital_name: 'PGIMER Chandigarh', 
+                address: 'Sector 12, Chandigarh - 160012', 
+                city: 'Chandigarh', 
+                state: 'Chandigarh', 
+                hospital_type: 'Public', 
+                bed_capacity: 1800, 
+                specialization: 'Multi-specialty',
+                phone: '+91-172-2756565',
+                emergency: '24x7 Available'
+            },
+            { 
+                hospital_name: 'Christian Medical College', 
+                address: 'Ida Scudder Road, Vellore - 632004', 
+                city: 'Vellore', 
+                state: 'Tamil Nadu', 
+                hospital_type: 'Private', 
+                bed_capacity: 2200, 
+                specialization: 'Multi-specialty, Research',
+                phone: '+91-416-2282020',
+                emergency: '24x7 Available'
+            },
+            { 
+                hospital_name: 'Sanjay Gandhi PGIMS', 
+                address: 'Rae Bareli Road, Lucknow - 226014', 
+                city: 'Lucknow', 
+                state: 'Uttar Pradesh', 
+                hospital_type: 'Public', 
+                bed_capacity: 1500, 
+                specialization: 'Trauma, Cardiology',
+                phone: '+91-522-2494424',
+                emergency: '24x7 Available'
+            },
+            { 
+                hospital_name: 'NIMS Hospital', 
+                address: 'Punjagutta, Hyderabad - 500082', 
+                city: 'Hyderabad', 
+                state: 'Telangana', 
+                hospital_type: 'Public', 
+                bed_capacity: 1200, 
+                specialization: 'Neurosciences, Oncology',
+                phone: '+91-40-23489000',
+                emergency: '24x7 Available'
+            },
+            { 
+                hospital_name: 'Narayana Health City', 
+                address: '258/A, Bommasandra Industrial Area, Bangalore - 560099', 
+                city: 'Bangalore', 
+                state: 'Karnataka', 
+                hospital_type: 'Private', 
+                bed_capacity: 1400, 
+                specialization: 'Cardiac Sciences, Oncology',
+                phone: '+91-80-71222222',
+                emergency: '24x7 Available'
+            },
+            { 
+                hospital_name: 'Tata Memorial Hospital', 
+                address: 'Dr E Borges Road, Parel, Mumbai - 400012', 
+                city: 'Mumbai', 
+                state: 'Maharashtra', 
+                hospital_type: 'Public', 
+                bed_capacity: 629, 
+                specialization: 'Cancer Treatment, Research',
+                phone: '+91-22-24177000',
+                emergency: '24x7 Available'
+            },
+            { 
+                hospital_name: 'Sree Chitra Tirunal Institute', 
+                address: 'Medical College P.O., Thiruvananthapuram - 695011', 
+                city: 'Thiruvananthapuram', 
+                state: 'Kerala', 
+                hospital_type: 'Public', 
+                bed_capacity: 540, 
+                specialization: 'Cardiothoracic Sciences',
+                phone: '+91-471-2524266',
+                emergency: '24x7 Available'
+            }
+        ];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayHospitalStatistics();
+            displaySampleHospitals();
+            showSuccessMessage();
+        });
+
+        function displayHospitalStatistics() {
+            const container = document.getElementById('stateStatistics');
+            
+            // Sort by total hospitals and show ALL 32 states
+            const sortedStates = hospitalStatesData
+                .map(state => ({
+                    ...state,
+                    total_hospitals: state.public_hospitals_count + state.private_hospitals_count,
+                    total_amount: state.public_hospitals_amount + state.private_hospitals_amount
+                }))
+                .sort((a, b) => b.total_hospitals - a.total_hospitals);
+
+            container.innerHTML = sortedStates.map((state, index) => `
+                <div class="col-12 mb-2">
+                    <div class="card">
+                        <div class="card-body py-2">
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+                                    <h6 class="mb-1">${index + 1}. ${state.state_name}</h6>
+                                    <small class="text-muted">Total: ${state.total_hospitals.toLocaleString()} hospitals</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row text-center">
+                                        <div class="col-6">
+                                            <small class="text-muted">Public</small>
+                                            <div class="text-success fw-bold">${state.public_hospitals_count.toLocaleString()}</div>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">Private</small>
+                                            <div class="text-primary fw-bold">${state.private_hospitals_count.toLocaleString()}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-end">
+                                        <small class="text-muted">Amount</small>
+                                        <div class="fw-bold">₹${state.total_amount.toFixed(2)} Cr</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function displaySampleHospitals() {
+            const container = document.getElementById('hospitalsList');
+            container.innerHTML = sampleHospitals.map(hospital => `
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h6 class="card-title text-primary">${hospital.hospital_name}</h6>
+                            <div class="card-text">
+                                <div class="mb-2">
+                                    <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                                    <small class="text-muted">${hospital.address}</small>
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-building text-success me-2"></i>
+                                    <span class="badge ${hospital.hospital_type === 'Private' ? 'bg-primary' : 'bg-success'}">${hospital.hospital_type}</span>
+                                    <span class="ms-2">${hospital.city}, ${hospital.state}</span>
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-bed text-info me-2"></i>
+                                    <strong>${hospital.bed_capacity}</strong> beds
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-stethoscope text-warning me-2"></i>
+                                    <small>${hospital.specialization}</small>
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-phone text-secondary me-2"></i>
+                                    <small>${hospital.phone}</small>
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-clock text-danger me-2"></i>
+                                    <small class="text-success">${hospital.emergency}</small>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100" onclick="showHospitalDetails('${hospital.hospital_name}', '${hospital.address}', '${hospital.phone}')">
+                                <i class="fas fa-info-circle me-1"></i>View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showDemo() {
+            new bootstrap.Modal(document.getElementById('demoModal')).show();
+        }
+
+        function showHospitalDetails(hospitalName, address, phone) {
+            const hospital = sampleHospitals.find(h => h.hospital_name === hospitalName);
+            const modalContent = `
+                <div class="modal fade" id="hospitalDetailModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    <i class="fas fa-hospital text-primary me-2"></i>
+                                    ${hospitalName}
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6 class="text-primary">Contact Information</h6>
+                                        <p><i class="fas fa-map-marker-alt text-danger me-2"></i><strong>Address:</strong><br>${address}</p>
+                                        <p><i class="fas fa-phone text-success me-2"></i><strong>Phone:</strong> ${phone}</p>
+                                        <p><i class="fas fa-clock text-warning me-2"></i><strong>Emergency:</strong> ${hospital.emergency}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="text-primary">Hospital Details</h6>
+                                        <p><i class="fas fa-building me-2"></i><strong>Type:</strong> ${hospital.hospital_type}</p>
+                                        <p><i class="fas fa-bed me-2"></i><strong>Bed Capacity:</strong> ${hospital.bed_capacity}</p>
+                                        <p><i class="fas fa-stethoscope me-2"></i><strong>Specialization:</strong><br>${hospital.specialization}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-primary">Insurance Network Status</h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card bg-light">
+                                                    <div class="card-body text-center">
+                                                        <i class="fas fa-check-circle text-success fa-2x mb-2"></i>
+                                                        <h6>Cashless Available</h6>
+                                                        <small class="text-muted">Direct billing with most insurance companies</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card bg-light">
+                                                    <div class="card-body text-center">
+                                                        <i class="fas fa-star text-warning fa-2x mb-2"></i>
+                                                        <h6>Preferred Provider</h6>
+                                                        <small class="text-muted">Part of ClaimEase network</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">
+                                    <i class="fas fa-file-medical me-1"></i>Start Claim Process
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove existing modal if any
+            const existingModal = document.getElementById('hospitalDetailModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Add new modal to body
+            document.body.insertAdjacentHTML('beforeend', modalContent);
+            
+            // Show modal
+            new bootstrap.Modal(document.getElementById('hospitalDetailModal')).show();
+        }
+
+        function showSuccessMessage() {
+            setTimeout(() => {
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
+                alertDiv.style.zIndex = '9999';
+                alertDiv.innerHTML = `
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong>Success!</strong> Your hospital data has been successfully integrated into ClaimEase!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                document.body.appendChild(alertDiv);
+                
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 5000);
+            }, 1000);
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

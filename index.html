@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClaimEase - Health Insurance Claims Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+        }
+        .feature-card {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .stats-card {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+        .dashboard-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .claim-status-pending { color: #ffc107; }
+        .claim-status-approved { color: #28a745; }
+        .claim-status-rejected { color: #dc3545; }
+        .claim-status-under-review { color: #17a2b8; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-heartbeat me-2"></i>ClaimEase</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#hospitals">Hospitals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#statistics">Statistics</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showLogin()">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showRegister()">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Welcome to ClaimEase</h1>
+            <p class="lead mb-5">Streamline your health insurance claims with our intelligent management system</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="stats-card p-4 text-center">
+                                <h3 id="totalHospitals">1000+</h3>
+                                <p class="mb-0">Empaneled Hospitals</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stats-card p-4 text-center">
+                                <h3 id="totalClaims">5000+</h3>
+                                <p class="mb-0">Claims Processed</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stats-card p-4 text-center">
+                                <h3 id="totalUsers">10000+</h3>
+                                <p class="mb-0">Happy Users</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Key Features</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 text-center p-4">
+                        <i class="fas fa-file-medical fa-3x text-primary mb-3"></i>
+                        <h5>Easy Claim Submission</h5>
+                        <p>Submit your insurance claims quickly with our user-friendly interface and document upload system.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 text-center p-4">
+                        <i class="fas fa-hospital fa-3x text-primary mb-3"></i>
+                        <h5>Hospital Network</h5>
+                        <p>Access our extensive network of empaneled hospitals across the country for cashless treatment.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 text-center p-4">
+                        <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                        <h5>Real-time Tracking</h5>
+                        <p>Track your claim status in real-time and get instant notifications on updates.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 text-center p-4">
+                        <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                        <h5>Secure & Reliable</h5>
+                        <p>Your data is protected with enterprise-grade security and encryption protocols.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 text-center p-4">
+                        <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+                        <h5>Mobile Friendly</h5>
+                        <p>Access ClaimEase from any device with our responsive web design.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card h-100 text-center p-4">
+                        <i class="fas fa-headset fa-3x text-primary mb-3"></i>
+                        <h5>24/7 Support</h5>
+                        <p>Get help anytime with our round-the-clock customer support team.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hospitals Section -->
+    <section id="hospitals" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Hospital Network</h2>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="hospitalSearch" placeholder="Search hospitals by name or city...">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="stateFilter">
+                        <option value="">All States</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Karnataka">Karnataka</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="typeFilter">
+                        <option value="">All Types</option>
+                        <option value="Public">Public</option>
+                        <option value="Private">Private</option>
+                    </select>
+                </div>
+            </div>
+            <div id="hospitalsList" class="row">
+                <!-- Hospitals will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="statistics" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Healthcare Statistics</h2>
+            <div id="stateStatistics" class="row">
+                <!-- State statistics will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to ClaimEase</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Register for ClaimEase</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" id="dateOfBirth" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dashboard Modal -->
+    <div class="modal fade" id="dashboardModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">My Dashboard</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="dashboard-card card p-3">
+                                <h6>Profile Information</h6>
+                                <div id="userProfile"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="dashboard-card card p-3">
+                                <h6>My Claims</h6>
+                                <div id="userClaims"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // API Base URL
+        const API_BASE = 'http://localhost:5000/api';
+        let authToken = localStorage.getItem('authToken');
+        let currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            loadHospitals();
+            loadStatistics();
+            updateNavigation();
+        });
+
+        function updateNavigation() {
+            const navbar = document.querySelector('.navbar-nav:last-child');
+            if (authToken) {
+                navbar.innerHTML = `
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            Welcome, ${currentUser.first_name || 'User'}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="showDashboard()">Dashboard</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout()">Logout</a></li>
+                        </ul>
+                    </li>
+                `;
+            }
+        }
+
+        async function apiCall(endpoint, options = {}) {
+            const url = `${API_BASE}${endpoint}`;
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(authToken && { 'Authorization': `Bearer ${authToken}` })
+                },
+                ...options
+            };
+
+            try {
+                const response = await fetch(url, config);
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'API call failed');
+                }
+                
+                return data;
+            } catch (error) {
+                console.error('API Error:', error);
+                showAlert(error.message, 'danger');
+                throw error;
+            }
+        }
+
+        async function loadHospitals() {
+            try {
+                const hospitals = await apiCall('/hospitals');
+                displayHospitals(hospitals.slice(0, 6)); // Show first 6 hospitals
+            } catch (error) {
+                // Fallback to sample data if API is not available
+                const sampleHospitals = [
+                    { hospital_name: 'Apollo Hospital Delhi', city: 'New Delhi', state: 'Delhi', hospital_type: 'Private', bed_capacity: 500 },
+                    { hospital_name: 'AIIMS New Delhi', city: 'New Delhi', state: 'Delhi', hospital_type: 'Public', bed_capacity: 2500 },
+                    { hospital_name: 'Fortis Hospital Mumbai', city: 'Mumbai', state: 'Maharashtra', hospital_type: 'Private', bed_capacity: 400 }
+                ];
+                displayHospitals(sampleHospitals);
+            }
+        }
+
+        function displayHospitals(hospitals) {
+            const hospitalsList = document.getElementById('hospitalsList');
+            hospitalsList.innerHTML = hospitals.map(hospital => `
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h6 class="card-title">${hospital.hospital_name}</h6>
+                            <p class="card-text">
+                                <i class="fas fa-map-marker-alt text-primary"></i> ${hospital.city}, ${hospital.state}<br>
+                                <i class="fas fa-building text-primary"></i> ${hospital.hospital_type}<br>
+                                <i class="fas fa-bed text-primary"></i> ${hospital.bed_capacity || 'N/A'} beds
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function loadStatistics() {
+            try {
+                const stats = await apiCall('/stats/hospital-states');
+                displayStateStatistics(stats.slice(0, 10)); // Show top 10 states
+            } catch (error) {
+                // Fallback to sample data
+                const sampleStats = [
+                    { state_name: 'Karnataka', total_hospitals: 925778, public_hospitals_count: 903417, private_hospitals_count: 22361 },
+                    { state_name: 'Andhra Pradesh', total_hospitals: 965934, public_hospitals_count: 660094, private_hospitals_count: 305840 },
+                    { state_name: 'Rajasthan', total_hospitals: 566765, public_hospitals_count: 538364, private_hospitals_count: 28401 }
+                ];
+                displayStateStatistics(sampleStats);
+            }
+        }
+
+        function displayStateStatistics(states) {
+            const stateStats = document.getElementById('stateStatistics');
+            stateStats.innerHTML = states.map(state => `
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card dashboard-card">
+                        <div class="card-body">
+                            <h6 class="card-title">${state.state_name}</h6>
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <small class="text-muted">Public</small>
+                                    <h6 class="text-success">${(state.public_hospitals_count || 0).toLocaleString()}</h6>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">Private</small>
+                                    <h6 class="text-primary">${(state.private_hospitals_count || 0).toLocaleString()}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showLogin() {
+            new bootstrap.Modal(document.getElementById('loginModal')).show();
+        }
+
+        function showRegister() {
+            new bootstrap.Modal(document.getElementById('registerModal')).show();
+        }
+
+        async function showDashboard() {
+            if (!authToken) {
+                showLogin();
+                return;
+            }
+
+            try {
+                const [profile, claims] = await Promise.all([
+                    apiCall('/user/profile'),
+                    apiCall('/claims')
+                ]);
+
+                document.getElementById('userProfile').innerHTML = `
+                    <p><strong>Name:</strong> ${profile.first_name} ${profile.last_name}</p>
+                    <p><strong>Email:</strong> ${profile.email}</p>
+                    <p><strong>Phone:</strong> ${profile.phone}</p>
+                    <p><strong>Policy:</strong> ${profile.policy_name || 'Not assigned'}</p>
+                `;
+
+                document.getElementById('userClaims').innerHTML = claims.length ? claims.map(claim => `
+                    <div class="border-bottom py-2">
+                        <div class="d-flex justify-content-between">
+                            <span><strong>${claim.claim_number}</strong></span>
+                            <span class="claim-status-${claim.claim_status.toLowerCase().replace(' ', '-')}">${claim.claim_status}</span>
+                        </div>
+                        <small class="text-muted">${claim.hospital_name} - ₹${claim.claim_amount}</small>
+                    </div>
+                `).join('') : '<p>No claims found</p>';
+
+                new bootstrap.Modal(document.getElementById('dashboardModal')).show();
+            } catch (error) {
+                console.error('Dashboard error:', error);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('currentUser');
+            authToken = null;
+            currentUser = {};
+            updateNavigation();
+            showAlert('Logged out successfully', 'success');
+        }
+
+        function showAlert(message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3`;
+            alertDiv.style.zIndex = '9999';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // Form handlers
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            try {
+                const response = await apiCall('/auth/login', {
+                    method: 'POST',
+                    body: JSON.stringify({ email, password })
+                });
+                
+                authToken = response.token;
+                currentUser = response.user;
+                localStorage.setItem('authToken', authToken);
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                updateNavigation();
+                bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+                showAlert('Login successful!', 'success');
+            } catch (error) {
+                console.error('Login error:', error);
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                first_name: document.getElementById('firstName').value,
+                last_name: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                date_of_birth: document.getElementById('dateOfBirth').value,
+                password: document.getElementById('password').value
+            };
+            
+            try {
+                await apiCall('/auth/register', {
+                    method: 'POST',
+                    body: JSON.stringify(formData)
+                });
+                
+                bootstrap.Modal.getInstance(document.getElementById('registerModal')).hide();
+                showAlert('Registration successful! Please login.', 'success');
+            } catch (error) {
+                console.error('Registration error:', error);
+            }
+        });
+
+        // Search and filter functionality
+        document.getElementById('hospitalSearch').addEventListener('input', function() {
+            // Implement hospital search
+        });
+
+        document.getElementById('stateFilter').addEventListener('change', function() {
+            // Implement state filter
+        });
+
+        document.getElementById('typeFilter').addEventListener('change', function() {
+            // Implement type filter
+        });
+    </script>
+</body>
+</html>
